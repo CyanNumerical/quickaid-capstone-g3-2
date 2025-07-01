@@ -7,7 +7,9 @@
       "name": "req",
       "methods": [
         "post"
-      ]
+      ],
+      "route": "submit_ticket"
+      
     },
     {
       "type": "http",

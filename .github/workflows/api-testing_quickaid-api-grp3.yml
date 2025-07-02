@@ -28,6 +28,7 @@ jobs:
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         with:
-          app-name: 'quickaid-api-grp3'  # <-- exact Azure Function App name
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          app-name: 'quickaid-api-grp3'
+          package: '.'  # ← deploying current dir
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          working-directory: ./api

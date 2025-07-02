@@ -1,0 +1,5 @@
+azure-cosmos
+azure-functions
+sendgrid
+azure-identity
+azure-keyvault-secrets

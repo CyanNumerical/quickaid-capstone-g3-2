@@ -22,8 +22,7 @@
         const result = await res.json();
         
         if (res.ok) {
-            messageEl.style.color = "green";
-            messageEl.textContent = 'Ticket submitted! ID: ${result.id}';
+            alert('Ticket submitted successfully!')
             form.reset();
         } else {
             throw new Error(result.error || "Something went wrong");

@@ -48,13 +48,13 @@ document.getElementById('searchForm').addEventListener('submit', async function(
   
   // ✅ ADD THESE TWO LINES BELOW
   console.log("Searching with", ticketId, email);
-  console.log("Calling:", `/api/get_ticket?${params.toString()}`);
+  console.log("Calling:", `/api/get_tickets?${params.toString()}`);
   
   const resultDiv = document.getElementById('result');
   resultDiv.innerHTML = 'Loading...';
   
   try {
-    const res = await fetch(`/api/get_ticket?${params.toString()}`);
+    const res = await fetch(`/api/get_tickets?${params.toString()}`);
     const data = await res.json();
     
     if (res.ok) {

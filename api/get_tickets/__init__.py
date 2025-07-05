@@ -15,13 +15,20 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         container = db.get_container_client("Tickets")
 
         if ticket_id:
-            query = f"SELECT * FROM Tickets t WHERE t.id = '{ticket_id}'"
+            query = "SELECT * FROM Tickets t WHERE t.id = @id"
+            parameters = [{"name": "@id", "value": ticket_id}]
         elif email:
-            query = f"SELECT * FROM Tickets t WHERE t.email = '{email}'"
+            query = "SELECT * FROM Tickets t WHERE t.email = @email"
+            parameters = [{"name": "@email", "value": email}]
         else:
             query = "SELECT * FROM Tickets t"
+            parameters = []
 
-        tickets = list(container.query_items(query=query, enable_cross_partition_query=True))
+        tickets = list(container.query_items(
+            query=query,
+            parameters=parameters,
+            enable_cross_partition_query=True
+        ))
 
         if not tickets:
             if not ticket_id and not email:
@@ -34,4 +41,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps(tickets), status_code=200, mimetype="application/json")
 
     except Exception as e:
-        return func.HttpResponse(str(e), status_code=500)
+        return func.HttpResponse(
+            json.dumps({"error": str(e)}),
+            status_code=500,
+            mimetype="application/json"
+        )

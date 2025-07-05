@@ -2,6 +2,17 @@
 <html>
 <head>
     <title>QuickAid Helpdesk</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        table {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Submit a Helpdesk Ticket</h1>
@@ -12,9 +23,19 @@
         <label>Description:<br><textarea id="description" required></textarea></label><br>
         <button type="submit">Submit</button>
     </form>
+
     <br>
-    <button onclick="window.location.href='view_ticket.html'">View Tickets</button>
-   
-    <script src = "script.js"></script>
+
+    <h2>Lists</h2>
+    <form id="searchForm">
+        <label>Ticket ID: <input type="text" id="ticket_id"></label><br>
+        <label>Email: <input type="email" id="search_email"></label><br>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Where search results will be shown -->
+    <div id="result"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>

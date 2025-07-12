@@ -39,6 +39,8 @@ document.getElementById('ticketForm')?.addEventListener('submit', async (e) => {
 
     const messageEl = document.getElementById('message');
     const form = document.getElementById('ticketForm');
+    const spinner = document.getElementById('submitSpinner');
+    spinner.style.display = 'inline-block'; // Show spinner
 
     const ticket = {
         email: document.getElementById('email').value,
@@ -64,6 +66,11 @@ document.getElementById('ticketForm')?.addEventListener('submit', async (e) => {
             const toastEl = document.getElementById('successToast');
             const toast = new bootstrap.Toast(toastEl);
             toast.show();
+
+            // Set and show modal message
+            document.getElementById('modalEmail').textContent = ticket.email;
+            const modal = new bootstrap.Modal(document.getElementById('successModal'));
+            modal.show();
         } else {
             throw new Error(result.error || "Something went wrong");
         }
@@ -73,6 +80,8 @@ document.getElementById('ticketForm')?.addEventListener('submit', async (e) => {
             messageEl.style.color = "red";
             messageEl.textContent = `Error: ${err.message}`;
         }
+    } finally {
+        spinner.style.display = 'none'; // Hide spinner
     }
 });
 

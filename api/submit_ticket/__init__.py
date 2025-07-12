@@ -28,11 +28,25 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         # Send email with SendGrid
         try:
             sg = sendgrid.SendGridAPIClient(api_key=os.environ['SENDGRID_API_KEY'])
+            html_content = f"""
+            <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+                <h2>Quickaid: New Ticket Submitted</h2>
+                <p>Hi <b>{ticket['email']}</b>,</p>
+                <p>We've received your ticket. Here's a summary:</p>
+                <ul>
+                    <li><strong>Ticket ID:</strong> {ticket['id']}</li>
+                    <li><strong>Title:</strong> {ticket['title']}</li>
+                    <li><strong>Category:</strong> {ticket['category']}</li>
+                    <li><strong>Status:</strong> {ticket['status']}</li>
+                </ul>
+                <p>Use your email or ticket ID to track status on the <a href="https://proud-river-01c922200.1.azurestaticapps.net">QuickAid Portal</a>.</p>
+            </div>
+            """
             message = Mail(
-                from_email='nurfashansyamil@gmail.com',  # Use your verified sender email
+                from_email='wafbwsh@gmail.com',  # Use your verified sender email
                 to_emails=ticket["email"],
                 subject='QuickAid Ticket Submitted',
-                html_content=f"Hi, your ticket '{ticket['title']}' has been received."
+                html_content=html_content #Use the defined HTML content
             )
             sg.send(message)
         except Exception as email_error:

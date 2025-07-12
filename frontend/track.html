@@ -1,0 +1,33 @@
+<!-- /frontend/track.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Track Ticket – QuickAid</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2>Track Your Ticket</h2>
+        <form id="searchForm" class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label>Email</label>
+                <input type="email" id="search_email" class="form-control" placeholder="your@email.com">
+            </div>
+            <div class="col-md-6">
+                <label>Ticket ID</label>
+                <input type="text" id="ticket_id" class="form-control" placeholder="e.g. 1234-5678">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Track Ticket</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="loadAllTickets()">Refresh All</button>
+            </div>
+        </form>
+
+        <div id="result" class="table-responsive"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

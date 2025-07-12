@@ -23,9 +23,14 @@
     const result = await res.json();
     
     if (res.ok) {
-      alert('Ticket submitted successfully!')
       form.reset();
-      loadAllTickets(); // This line to refresh the list
+      loadAllTickets(); // Refresh list
+
+      // Show toast
+      const toastEl = document.getElementById('successToast');
+      const toast = new bootstrap.Toast(toastEl);
+      toast.show();
+
     } else {
       throw new Error(result.error || "Something went wrong");
     }
